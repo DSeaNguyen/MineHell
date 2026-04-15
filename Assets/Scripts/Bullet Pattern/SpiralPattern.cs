@@ -39,7 +39,7 @@ public class SpiralPattern : BulletPattern
         rb.linearVelocity = Vector2.zero;
         rb.linearVelocity = dir * bulletSpeed;
 
-        bullet.GetComponent<Bullet>().Init(spiralPool);
+        bullet.GetComponent<Bullet>().Init(spiralPool, dir);
 
         angle += rotateSpeed;
     }

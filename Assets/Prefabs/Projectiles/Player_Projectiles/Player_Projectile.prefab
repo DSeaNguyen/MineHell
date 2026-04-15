@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 2571511283337527390}
   - component: {fileID: 8849865832301949177}
   - component: {fileID: 2410745567102331090}
-  - component: {fileID: 6955890141537850218}
   - component: {fileID: 6049354612434518188}
-  - component: {fileID: 4099572394843378986}
   - component: {fileID: 3089550953289248105}
+  - component: {fileID: 7010049434227968534}
   m_Layer: 12
   m_Name: Player_Projectile
   m_TagString: Untagged
@@ -118,20 +117,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6955890141537850218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3562651836113712045}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b58ca2f55b8d54e44921b14b727bf610, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifetime: 1.5
-  destroyChildrenOnDeath: 1
 --- !u!60 &6049354612434518188
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -188,19 +173,6 @@ PolygonCollider2D:
       - {x: 0.057638645, y: 0.21122718}
       - {x: 0.015625, y: 0.23573518}
   m_UseDelaunayMesh: 0
---- !u!114 &4099572394843378986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3562651836113712045}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bd8ed0746ef8324aa9b33326bd46bb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileSpeed: 25
 --- !u!114 &3089550953289248105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,3 +192,18 @@ MonoBehaviour:
   dealDamageOnTriggerEnter: 1
   dealDamageOnTriggerStay: 0
   dealDamageOnCollision: 0
+--- !u!114 &7010049434227968534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3562651836113712045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19da282e69852b4cb80de7080fb4083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bullet
+  speed: 20
+  useRigidbody: 0
+  lifetime: 3

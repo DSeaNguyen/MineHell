@@ -144,9 +144,11 @@ public class ShootingController : MonoBehaviour
     {
         GameObject projectileGameObject = playerPool.GetBullet();
 
-        projectileGameObject.transform.position = transform.position;
+        projectileGameObject.transform.SetParent(null);
 
-        // Tính hướng bắn
+        projectileGameObject.transform.position = transform.position;
+        projectileGameObject.transform.rotation = Quaternion.identity;
+
         Vector3 shootDirection = transform.up;
 
         if (isPlayerControlled && Camera.main != null)
@@ -156,11 +158,9 @@ public class ShootingController : MonoBehaviour
             shootDirection = (mouseWorldPos - transform.position).normalized;
         }
 
-        // Set rotation theo hướng bắn
         float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg - 90f;
         projectileGameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
 
-        // Set parent nếu có
         if (projectileHolder == null && GameObject.Find("ProjectileHolder") != null)
         {
             projectileHolder = GameObject.Find("ProjectileHolder").transform;
@@ -170,21 +170,15 @@ public class ShootingController : MonoBehaviour
             projectileGameObject.transform.SetParent(projectileHolder);
         }
 
-        // Velocity
-        Rigidbody2D rb = projectileGameObject.GetComponent<Rigidbody2D>();
-        if (rb != null)
+        Bullet bullet = projectileGameObject.GetComponent<Bullet>();
+        if (bullet != null)
         {
-            rb.linearVelocity = Vector2.zero; // 🔥 reset
-            rb.linearVelocity = shootDirection * 10f;
+            Debug.Log("Init Bullet OK");
+            bullet.Init(playerPool, shootDirection);
         }
-
-        // Spread
-        projectileGameObject.transform.rotation *= Quaternion.Euler(0, 0, Random.Range(-projectileSpread, projectileSpread));
-
-        Projectile proj = projectileGameObject.GetComponent<Projectile>();
-        if (proj != null)
+        else
         {
-            proj.Init(playerPool);
+            Debug.LogError("KHÔNG có Bullet component!");
         }
     }
 }

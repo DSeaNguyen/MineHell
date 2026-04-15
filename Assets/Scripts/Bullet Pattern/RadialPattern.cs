@@ -44,7 +44,7 @@ public class RadialPattern : BulletPattern
             rb.linearVelocity = Vector2.zero;
             rb.linearVelocity = dir * bulletSpeed;
 
-            bullet.GetComponent<Bullet>().Init(radialPool);
+            bullet.GetComponent<Bullet>().Init(radialPool, dir);
         }
 
         angleOffset += rotateSpeed;
