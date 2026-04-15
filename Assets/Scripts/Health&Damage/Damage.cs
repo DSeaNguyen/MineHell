@@ -100,11 +100,21 @@ public class Damage : MonoBehaviour
                 }
                 if (destroyAfterDamage)
                 {
+                    Bullet bullet = GetComponent<Bullet>();
+
                     if (gameObject.GetComponent<Enemy>() != null)
                     {
                         gameObject.GetComponent<Enemy>().DoBeforeDestroy();
                     }
-                    Destroy(this.gameObject);
+
+                    if (bullet != null)
+                    {
+                        bullet.ReturnToPool();
+                    }
+                    else
+                    {
+                        Destroy(this.gameObject);
+                    }
                 }
             }
         }

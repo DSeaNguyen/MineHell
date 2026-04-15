@@ -145,6 +145,7 @@ public class GameManager : MonoBehaviour
     /// Returns:
     /// void (no return)
     /// </summary>
+    [System.Obsolete]
     private void FigureOutHowManyEnemiesExist()
     {
         List<EnemySpawner> enemySpawners = FindObjectsOfType<EnemySpawner>().ToList();

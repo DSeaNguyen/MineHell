@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2535222879597372320}
   - component: {fileID: 4490386839674758099}
   - component: {fileID: 5884004565031732798}
+  - component: {fileID: 8096264381829053208}
   m_Layer: 13
   m_Name: Enemy_StraightProjectile Boss
   m_TagString: Untagged
@@ -247,3 +248,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TimedObjectDestroyer
   lifetime: 5
   destroyChildrenOnDeath: 1
+--- !u!114 &8096264381829053208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4641165794769155162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19da282e69852b4cb80de7080fb4083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bullet
