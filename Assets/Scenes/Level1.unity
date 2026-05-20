@@ -617,7 +617,7 @@ PrefabInstance:
       objectReference: {fileID: 1905165194}
     - target: {fileID: 4067299900283473899, guid: 9e9e6f984ec5cc04b88f6c880b9a91ba, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4067299900283473899, guid: 9e9e6f984ec5cc04b88f6c880b9a91ba, type: 3}
       propertyPath: spawnInterval
@@ -5274,6 +5274,10 @@ PrefabInstance:
     - target: {fileID: 2135945322231376701, guid: 4eb6f75f6c96a3b45b703f49fb8d2956, type: 3}
       propertyPath: fireRate
       value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135945322231376701, guid: 4eb6f75f6c96a3b45b703f49fb8d2956, type: 3}
+      propertyPath: fireEffect
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2135945322231376701, guid: 4eb6f75f6c96a3b45b703f49fb8d2956, type: 3}
       propertyPath: playerPool

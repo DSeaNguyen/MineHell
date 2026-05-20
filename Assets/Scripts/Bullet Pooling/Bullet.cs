@@ -44,6 +44,7 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
+        timer += Time.deltaTime;
         if (!useRigidbody)
         {
             transform.position += transform.up * speed * Time.deltaTime;
@@ -51,7 +52,6 @@ public class Bullet : MonoBehaviour
 
         if (!isInitialized) return;
 
-        timer += Time.deltaTime;
 
         if (timer >= lifetime)
         {

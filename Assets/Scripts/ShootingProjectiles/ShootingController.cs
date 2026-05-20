@@ -142,6 +142,8 @@ public class ShootingController : MonoBehaviour
     /// </summary>
     public void SpawnProjectile()
     {
+        Debug.Log("SPAWN BULLET");
+
         GameObject projectileGameObject = playerPool.GetBullet();
 
         projectileGameObject.transform.SetParent(null);
