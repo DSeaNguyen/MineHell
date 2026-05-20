@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2160022830150475293}
   - component: {fileID: 2535222879597372320}
   - component: {fileID: 4490386839674758099}
-  - component: {fileID: 5884004565031732798}
+  - component: {fileID: 8096264381829053208}
   m_Layer: 13
   m_Name: Enemy_StraightProjectile Boss
   m_TagString: Untagged
@@ -233,7 +233,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &5884004565031732798
+--- !u!114 &8096264381829053208
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -242,8 +242,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4641165794769155162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b58ca2f55b8d54e44921b14b727bf610, type: 3}
+  m_Script: {fileID: 11500000, guid: d19da282e69852b4cb80de7080fb4083, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TimedObjectDestroyer
-  lifetime: 5
-  destroyChildrenOnDeath: 1
+  m_EditorClassIdentifier: Assembly-CSharp::Bullet
+  speed: 5
+  useRigidbody: 1
+  lifetime: 3

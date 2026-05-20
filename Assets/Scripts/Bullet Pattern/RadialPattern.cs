@@ -1,16 +1,16 @@
 using System.Collections;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class RadialPattern : BulletPattern
 {
-    public GameObject bulletPrefab;
+    public BulletPool radialPool;
+
     public int bulletCount = 20;
     public float fireRate = 1f;
     public float bulletSpeed = 5f;
     public float rotateSpeed = 10f;
 
-    private float angleOffset = 1f;
+    private float angleOffset = 0f;
 
     public override IEnumerator Execute()
     {
@@ -34,8 +34,17 @@ public class RadialPattern : BulletPattern
 
             Vector2 dir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            bullet.GetComponent<Rigidbody2D>().linearVelocity = dir * bulletSpeed;
+            GameObject bullet = radialPool.GetBullet();
+
+            bullet.transform.position = transform.position;
+            bullet.transform.rotation = Quaternion.identity;
+
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+
+            rb.linearVelocity = Vector2.zero;
+            rb.linearVelocity = dir * bulletSpeed;
+
+            bullet.GetComponent<Bullet>().Init(radialPool, dir);
         }
 
         angleOffset += rotateSpeed;

@@ -35,6 +35,8 @@ public class ShootingController : MonoBehaviour
     [Tooltip("The effect to create when this fires")]
     public GameObject fireEffect;
 
+    public BulletPool playerPool;
+
     /// <summary>
     /// Standard Unity function called whenever the attached gameobject is enabled
     /// </summary>
@@ -140,43 +142,45 @@ public class ShootingController : MonoBehaviour
     /// </summary>
     public void SpawnProjectile()
     {
-        // Check that the prefab is valid
-        if (projectilePrefab != null)
+        Debug.Log("SPAWN BULLET");
+
+        GameObject projectileGameObject = playerPool.GetBullet();
+
+        projectileGameObject.transform.SetParent(null);
+
+        projectileGameObject.transform.position = transform.position;
+        projectileGameObject.transform.rotation = Quaternion.identity;
+
+        Vector3 shootDirection = transform.up;
+
+        if (isPlayerControlled && Camera.main != null)
         {
-            Vector3 shootDirection = transform.up;
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            mouseWorldPos.z = 0;
+            shootDirection = (mouseWorldPos - transform.position).normalized;
+        }
 
-            if (isPlayerControlled && Camera.main != null)
-            {
-                Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-                mouseWorldPos.z = 0;
-                shootDirection = (mouseWorldPos - transform.position).normalized;
-            }
-            else
-            {
-                shootDirection = transform.up;
-            }
+        float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg - 90f;
+        projectileGameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
 
-            GameObject projectileGameObject = Instantiate(projectilePrefab, transform.position, Quaternion.identity, null);
+        if (projectileHolder == null && GameObject.Find("ProjectileHolder") != null)
+        {
+            projectileHolder = GameObject.Find("ProjectileHolder").transform;
+        }
+        if (projectileHolder != null)
+        {
+            projectileGameObject.transform.SetParent(projectileHolder);
+        }
 
-            float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg - 90f;
-            projectileGameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
-
-            if (projectileHolder == null && GameObject.Find("ProjectileHolder") != null)
-            {
-                projectileHolder = GameObject.Find("ProjectileHolder").transform;
-            }
-            if (projectileHolder != null)
-            {
-                projectileGameObject.transform.SetParent(projectileHolder);
-            }
-
-            Rigidbody2D rb = projectileGameObject.GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                rb.linearVelocity = shootDirection * 10f; 
-            }
-
-            projectileGameObject.transform.rotation *= Quaternion.Euler(0, 0, Random.Range(-projectileSpread, projectileSpread));
+        Bullet bullet = projectileGameObject.GetComponent<Bullet>();
+        if (bullet != null)
+        {
+            Debug.Log("Init Bullet OK");
+            bullet.Init(playerPool, shootDirection);
+        }
+        else
+        {
+            Debug.LogError("KHÔNG có Bullet component!");
         }
     }
 }

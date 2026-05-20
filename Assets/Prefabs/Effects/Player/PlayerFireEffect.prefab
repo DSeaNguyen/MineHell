@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 5
-  destroyChildrenOnDeath: 1
+  destroyChildrenOnDeath: 0
 --- !u!82 &214131468807516804
 AudioSource:
   m_ObjectHideFlags: 0
