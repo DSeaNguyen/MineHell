@@ -20,7 +20,6 @@ public class BulletPool : MonoBehaviour
 
     public GameObject GetBullet()
     {
-        Debug.Log("GET bullet");
 
         if (pool.Count > 0)
         {
@@ -29,13 +28,11 @@ public class BulletPool : MonoBehaviour
             return bullet;
         }
 
-        Debug.Log("CREATE NEW bullet");
         return Instantiate(bulletPrefab);
     }
 
     public void ReturnBullet(GameObject bullet)
     {
-        Debug.Log("RETURN bullet");
         bullet.SetActive(false);
         pool.Enqueue(bullet);
     }

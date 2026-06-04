@@ -4042,11 +4042,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46150e551bd38644e8216ee79c75cb34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OrbitRingThrowPattern
-  duration: 5
+  duration: 3.5
   bulletPool: {fileID: 8987332478165026175, guid: e9b56732b2e859b4885b732dd359eada, type: 3}
-  spawnRadius: 5
-  bulletCircleRadius: 2
-  bulletsPerRing: 10
+  spawnRadius: 3
+  bulletCircleRadius: 1
+  bulletsPerRing: 6
   fadeDuration: 0.4
   maxRotationSpeed: 360
   throwSpeed: 15

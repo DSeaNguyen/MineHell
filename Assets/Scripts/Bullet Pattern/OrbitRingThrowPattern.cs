@@ -30,7 +30,7 @@ public class OrbitRingThrowPattern : BulletPattern
     // Semicircle angles above the boss: left to right
     private readonly float[] ringAngles = { 180f, 135f, 45f, 0f };
     private readonly float[] summonTimes = { 0.0f, 0.2f, 0.4f, 0.6f };
-    private readonly float[] throwTimes = { 2.5f, 2.8f, 3.1f, 3.4f };
+    private readonly float[] throwTimes = { 1.8f, 2.1f, 2.4f, 2.7f };
 
     private RingController[] rings = new RingController[4];
     private float patternStartTime;
