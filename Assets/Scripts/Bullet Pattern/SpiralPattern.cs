@@ -9,6 +9,8 @@ public class SpiralPattern : BulletPattern
     public float bulletSpeed = 5f;
     public float rotateSpeed = 10f;
 
+    public int streamCount = 1;
+
     private float angle = 0f;
 
     public override IEnumerator Execute()
@@ -18,28 +20,40 @@ public class SpiralPattern : BulletPattern
         while (timer < duration)
         {
             FireSpiral();
+
             yield return new WaitForSeconds(fireRate);
+
             timer += fireRate;
         }
     }
 
     void FireSpiral()
     {
-        float rad = angle * Mathf.Deg2Rad;
+        float angleStep = 360f / streamCount;
 
-        Vector2 dir = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
+        for (int i = 0; i < streamCount; i++)
+        {
+            float currentAngle = angle + (i * angleStep);
 
-        GameObject bullet = spiralPool.GetBullet();
+            float rad = currentAngle * Mathf.Deg2Rad;
 
-        bullet.transform.position = transform.position;
-        bullet.transform.rotation = Quaternion.identity;
+            Vector2 dir = new Vector2(
+                Mathf.Cos(rad),
+                Mathf.Sin(rad)
+            );
 
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            GameObject bullet = spiralPool.GetBullet();
 
-        rb.linearVelocity = Vector2.zero;
-        rb.linearVelocity = dir * bulletSpeed;
+            bullet.transform.position = transform.position;
+            bullet.transform.rotation = Quaternion.identity;
 
-        bullet.GetComponent<Bullet>().Init(spiralPool, dir);
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+
+            rb.linearVelocity = Vector2.zero;
+            rb.linearVelocity = dir * bulletSpeed;
+
+            bullet.GetComponent<Bullet>().Init(spiralPool, dir);
+        }
 
         angle += rotateSpeed;
     }

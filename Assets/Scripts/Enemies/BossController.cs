@@ -11,7 +11,8 @@ public class BossController : MonoBehaviour
     public List<BossPhase> phases = new List<BossPhase>();
 
     private int currentPhase = 0;
-    private List<Coroutine> runningPatterns = new List<Coroutine>();
+    private Coroutine activeMoveRoutine = null;
+    private Coroutine activeBulletRoutine = null;
 
     private Health health;
 
@@ -65,10 +66,7 @@ public class BossController : MonoBehaviour
     {
         if (phaseIndex >= phases.Count) return;
 
-        if (phaseRoutine != null)
-        {
-            StopCoroutine(phaseRoutine);
-        }
+        StopAllActivePatterns();
 
         currentPhase = phaseIndex;
 
@@ -77,18 +75,80 @@ public class BossController : MonoBehaviour
         Debug.Log("Boss Phase: " + currentPhase);
     }
 
+    void StopAllActivePatterns()
+    {
+        if (phaseRoutine != null)
+        {
+            StopCoroutine(phaseRoutine);
+            phaseRoutine = null;
+        }
+        if (activeMoveRoutine != null)
+        {
+            StopCoroutine(activeMoveRoutine);
+            activeMoveRoutine = null;
+        }
+        if (activeBulletRoutine != null)
+        {
+            StopCoroutine(activeBulletRoutine);
+            activeBulletRoutine = null;
+        }
+    }
+
     IEnumerator RunPhase(int phaseIndex)
     {
         var phase = phases[phaseIndex];
 
-        while (true) 
+        while (true)
         {
-            foreach (var pattern in phase.patterns)
+            foreach (var step in phase.steps)
             {
-                if (pattern != null)
-                {
-                    yield return StartCoroutine(pattern.Execute());
-                }
+                yield return StartCoroutine(ExecuteStep(step));
+            }
+        }
+    }
+
+    IEnumerator ExecuteStep(BossActionStep step)
+    {
+        if (step.executeInParallel)
+        {
+            activeMoveRoutine = null;
+            activeBulletRoutine = null;
+
+            if (step.movement != null)
+            {
+                activeMoveRoutine = StartCoroutine(step.movement.Execute());
+            }
+            if (step.bulletPattern != null)
+            {
+                activeBulletRoutine = StartCoroutine(step.bulletPattern.Execute());
+            }
+
+            // Wait for both to finish
+            if (activeMoveRoutine != null)
+            {
+                yield return activeMoveRoutine;
+                activeMoveRoutine = null;
+            }
+            if (activeBulletRoutine != null)
+            {
+                yield return activeBulletRoutine;
+                activeBulletRoutine = null;
+            }
+        }
+        else
+        {
+            // Sequential: movement first, then bullet pattern
+            if (step.movement != null)
+            {
+                activeMoveRoutine = StartCoroutine(step.movement.Execute());
+                yield return activeMoveRoutine;
+                activeMoveRoutine = null;
+            }
+            if (step.bulletPattern != null)
+            {
+                activeBulletRoutine = StartCoroutine(step.bulletPattern.Execute());
+                yield return activeBulletRoutine;
+                activeBulletRoutine = null;
             }
         }
     }

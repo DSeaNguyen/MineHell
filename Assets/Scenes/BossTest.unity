@@ -3978,9 +3978,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossController
   autoStart: 1
   phases:
-  - steps: []
-  - steps: []
-  - steps: []
+  - patterns:
+    - {fileID: 1776438759}
+  - patterns:
+    - {fileID: 1776438758}
+  - patterns:
+    - {fileID: 1776438759}
+    - {fileID: 1776438769}
   phase2Threshold: 0.8
   phase3Threshold: 0.5
 --- !u!114 &1776438769
@@ -5479,10 +5483,6 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1905165194}
-    - target: {fileID: 7858414468686376909, guid: d15e3fd7d3127054a8a49f6cf6f93c70, type: 3}
-      propertyPath: orthographic size
-      value: 12
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
