@@ -123,6 +123,11 @@ public class Health : MonoBehaviour
     /// <param name="damageAmount">The amount of damage to take</param>
     public void TakeDamage(int damageAmount)
     {
+        Debug.Log(
+            gameObject.name +
+            " took damage from frame"
+        );
+
         if (isInvincibleFromDamage || isAlwaysInvincible)
         {
             return;
@@ -196,6 +201,8 @@ public class Health : MonoBehaviour
     /// </summary>
     public void Die()
     {
+        Debug.Log("BOSS DIED");
+
         if (deathEffect != null)
         {
             Instantiate(deathEffect, transform.position, transform.rotation, null);
