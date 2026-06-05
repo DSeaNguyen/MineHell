@@ -135,6 +135,34 @@ public class OrbitRingThrowPattern : BulletPattern
             }
         }
     }
+
+    private void OnDisable()
+    {
+        CleanupRings();
+    }
+
+    private void OnDestroy()
+    {
+        CleanupRings();
+    }
+
+    /// <summary>
+    /// Destroys all live ring container GameObjects.
+    /// RingController.OnDestroy handles returning bullets to the pool.
+    /// </summary>
+    private void CleanupRings()
+    {
+        if (rings == null) return;
+
+        for (int i = 0; i < rings.Length; i++)
+        {
+            if (rings[i] != null)
+            {
+                Destroy(rings[i].gameObject);
+                rings[i] = null;
+            }
+        }
+    }
 }
 
 public class RingController : MonoBehaviour
