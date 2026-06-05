@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7554764028089577801}
   - component: {fileID: 7426619032640090416}
   m_Layer: 0
-  m_Name: BulletPool_Radial
+  m_Name: Radial_BulletPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

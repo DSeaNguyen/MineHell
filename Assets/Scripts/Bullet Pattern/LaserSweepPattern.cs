@@ -51,7 +51,6 @@ public class LaserSweepPattern : BulletPattern
     {
         if (leftSweepPoint == null || rightSweepPoint == null)
         {
-            Debug.LogError("LaserSweepPattern needs left and right sweep points assigned!");
             yield break;
         }
 
@@ -108,7 +107,6 @@ public class LaserSweepPattern : BulletPattern
     {
         if (laserPrefab == null)
         {
-            Debug.LogError("LaserSweepPattern: laserPrefab is not assigned in the Inspector!");
             return;
         }
 
@@ -146,7 +144,6 @@ public class LaserSweepPattern : BulletPattern
     {
         if (bulletPool == null)
         {
-            Debug.LogWarning("LaserSweepPattern: Bullet Pool reference is missing! Bullet rain skipped.");
             yield break;
         }
 

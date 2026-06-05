@@ -24,6 +24,14 @@ public class RadialPattern : BulletPattern
         }
     }
 
+    /// <summary>
+    /// Fires a single radial burst ring of bullets.
+    /// </summary>
+    public void FireSingleRing()
+    {
+        FireRadial();
+    }
+
     void FireRadial()
     {
         float angleStep = 360f / bulletCount;

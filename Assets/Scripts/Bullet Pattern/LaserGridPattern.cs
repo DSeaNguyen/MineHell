@@ -34,13 +34,11 @@ public class LaserGridPattern : BulletPattern
     {
         if (horizontalLaserPrefab == null || verticalLaserPrefab == null)
         {
-            Debug.LogError("LaserGridPattern: Horizontal and Vertical laser prefabs must be assigned!");
             yield break;
         }
 
         if (topSpawnPoint == null || bottomTargetPoint == null || leftSpawnPoint == null || rightTargetPoint == null)
         {
-            Debug.LogError("LaserGridPattern: All arena boundary transforms must be assigned!");
             yield break;
         }
 
