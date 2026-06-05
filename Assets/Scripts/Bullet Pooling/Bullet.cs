@@ -15,6 +15,15 @@ public class Bullet : MonoBehaviour
     private BulletPool pool;
     private bool isInitialized = false;
 
+    /// <summary>
+    /// Allows BulletPool to register overflow (Instantiated) bullets with the pool
+    /// so that ReturnToPool() works correctly on bullets created outside pre-warming.
+    /// </summary>
+    public void SetPool(BulletPool bulletPool)
+    {
+        pool = bulletPool;
+    }
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -39,7 +48,15 @@ public class Bullet : MonoBehaviour
 
     void OnEnable()
     {
-        
+        // Reset state every time the bullet is retrieved from the pool.
+        // This mirrors what Init() does, but fires earlier — ensuring the
+        // bullet is clean even if Init() is called one frame later.
+        timer = 0f;
+        isInitialized = false;
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
     }
 
     void Update()

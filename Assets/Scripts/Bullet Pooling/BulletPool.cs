@@ -28,7 +28,15 @@ public class BulletPool : MonoBehaviour
             return bullet;
         }
 
-        return Instantiate(bulletPrefab);
+        // Pool exhausted: create an overflow bullet and register it with THIS pool
+        // so that Bullet.ReturnToPool() correctly re-enqueues it instead of no-oping.
+        GameObject overflow = Instantiate(bulletPrefab);
+        Bullet overflowScript = overflow.GetComponent<Bullet>();
+        if (overflowScript != null)
+        {
+            overflowScript.SetPool(this);
+        }
+        return overflow;
     }
 
     public void ReturnBullet(GameObject bullet)

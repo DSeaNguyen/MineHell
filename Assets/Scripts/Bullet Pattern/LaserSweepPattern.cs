@@ -168,9 +168,13 @@ public class LaserSweepPattern : BulletPattern
         GameObject bullet = bulletPool.GetBullet();
         if (bullet == null) yield break;
 
+        // Track immediately — the very first thing after confirming the bullet exists.
+        // This guarantees CleanupRainBullets() can always find and return this bullet
+        // to the pool, even if StopAllCoroutines fires before any later line executes.
+        activeRainBullets.Add(bullet);
+
         bullet.transform.position = spawnPos;
         bullet.transform.rotation = Quaternion.Euler(0, 0, 180f); // point downwards
-        activeRainBullets.Add(bullet);
 
         Bullet bulletScript = bullet.GetComponent<Bullet>();
         if (bulletScript != null)
