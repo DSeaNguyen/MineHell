@@ -1,8 +1,14 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// Spawn enemy xung quanh boss
+/// Spawns enemy waves around the boss.
+/// 
+/// Lifecycle is controlled externally by BossController:
+///   - BossController sets enabled = true  → OnEnable starts the spawn loop.
+///   - BossController sets enabled = false → OnDisable stops the spawn loop immediately.
+/// 
+/// EnemySpawner itself has no phase awareness and performs no per-frame checks.
 /// </summary>
 public class EnemySpawner : MonoBehaviour
 {
@@ -14,14 +20,29 @@ public class EnemySpawner : MonoBehaviour
 
     public int enemiesPerWave = 3;
     public float spawnInterval = 10f;
-    public int maxSpawn = 0; // 0 = vô hạn
+    public int maxSpawn = 0;        // 0 = unlimited
     public bool spawnInfinite = true;
 
     private int currentlySpawned = 0;
 
-    private void Start()
+    /// <summary>
+    /// Called whenever this component is enabled.
+    /// BossController enables this component to begin Phase 1 spawning.
+    /// </summary>
+    private void OnEnable()
     {
         StartCoroutine(SpawnLoop());
+    }
+
+    /// <summary>
+    /// Called whenever this component is disabled.
+    /// BossController disables this component on Phase 2+ to halt all future spawns.
+    /// StopAllCoroutines kills the SpawnLoop immediately, even mid-interval.
+    /// Existing spawned enemies are unaffected.
+    /// </summary>
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     private IEnumerator SpawnLoop()
@@ -65,7 +86,7 @@ public class EnemySpawner : MonoBehaviour
         {
             enemy.followTarget = target;
 
-            // Nếu màn boss → quái phụ không tính điểm
+            // Boss level sub-enemies don't award score
             if (GameManager.instance != null && GameManager.instance.isBossLevel && !enemy.isBoss)
             {
                 enemy.scoreValue = 0;

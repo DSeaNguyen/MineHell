@@ -14,6 +14,10 @@ public class BossController : MonoBehaviour
     [Tooltip("Seconds to wait between stopping the old phase and starting the new one.")]
     public float phaseTransitionDelay = 1f;
 
+    [Header("Enemy Spawner")]
+    [Tooltip("EnemySpawner to activate during Phase 1 only. Leave null if not used.")]
+    public EnemySpawner enemySpawner;
+
     [Header("Phase Thresholds (%)")]
     public float phase2Threshold = 0.5f;
     public float phase3Threshold = 0.2f;
@@ -88,6 +92,17 @@ public class BossController : MonoBehaviour
         StopAllActivePatterns();
 
         currentPhase = phaseIndex;
+
+        // --- Enemy Spawner control ---
+        // Spawner is only active during Phase 1 (index 0).
+        // Setting enabled = true  fires EnemySpawner.OnEnable → starts SpawnLoop.
+        // Setting enabled = false fires EnemySpawner.OnDisable → StopAllCoroutines.
+        if (enemySpawner != null)
+        {
+            bool shouldSpawn = (phaseIndex == 0 || phaseIndex == 1);
+            enemySpawner.enabled = shouldSpawn;
+            Debug.Log($"[BossController] EnemySpawner {(shouldSpawn ? "enabled" : "disabled")} for Phase {phaseIndex + 1}.");
+        }
 
         // Use a transition wrapper so we can insert the delay before running the phase
         phaseRoutine = StartCoroutine(TransitionAndStartPhase(phaseIndex));
