@@ -623,6 +623,14 @@ PrefabInstance:
       propertyPath: spawnInterval
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 5261125957255138080, guid: 9e9e6f984ec5cc04b88f6c880b9a91ba, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5261125957255138080, guid: 9e9e6f984ec5cc04b88f6c880b9a91ba, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1567856827
+      objectReference: {fileID: 0}
     - target: {fileID: 5261125957255138082, guid: 9e9e6f984ec5cc04b88f6c880b9a91ba, type: 3}
       propertyPath: m_Name
       value: Boss
@@ -5575,6 +5583,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 219665551}
     m_Modifications:
+    - target: {fileID: 1618202353978744632, guid: a4c1ce3b5eca5574b9a65860cf6b8ed3, type: 3}
+      propertyPath: m_Name
+      value: Main Menu
+      objectReference: {fileID: 0}
     - target: {fileID: 3847986125320956383, guid: a4c1ce3b5eca5574b9a65860cf6b8ed3, type: 3}
       propertyPath: m_Name
       value: LevelVictoryScreen
@@ -5677,7 +5689,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7043305375758215356, guid: a4c1ce3b5eca5574b9a65860cf6b8ed3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Level2
+      value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637816384617239037, guid: a4c1ce3b5eca5574b9a65860cf6b8ed3, type: 3}
+      propertyPath: m_Name
+      value: Main Menu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5692,6 +5708,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 562478546632737757, guid: 4eb6f75f6c96a3b45b703f49fb8d2956, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 562478546632737757, guid: 4eb6f75f6c96a3b45b703f49fb8d2956, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1374018219
+      objectReference: {fileID: 0}
     - target: {fileID: 616659686416438832, guid: 4eb6f75f6c96a3b45b703f49fb8d2956, type: 3}
       propertyPath: m_Name
       value: Player
@@ -5888,7 +5912,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2813427331379106645, guid: d15e3fd7d3127054a8a49f6cf6f93c70, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6659904078492982157, guid: d15e3fd7d3127054a8a49f6cf6f93c70, type: 3}
       propertyPath: m_Name
