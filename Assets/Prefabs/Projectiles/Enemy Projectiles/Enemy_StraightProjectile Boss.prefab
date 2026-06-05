@@ -247,4 +247,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
   speed: 5
   useRigidbody: 1
-  lifetime: 3
+  lifetime: 5

@@ -4331,7 +4331,7 @@ MonoBehaviour:
   spiralPool: {fileID: 1660545288}
   fireRate: 0.1
   bulletSpeed: 15
-  rotateSpeed: 45
+  rotateSpeed: 67.5
   streamCount: 3
 --- !u!114 &1776438759
 MonoBehaviour:
